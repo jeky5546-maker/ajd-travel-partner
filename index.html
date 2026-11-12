@@ -113,24 +113,34 @@ tr:last-child td{font-weight:800;color:var(--blue)}
 @media (max-width:720px){.fit{grid-template-columns:1fr}}
 
 .steps{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:s}
-.steps li{counter-increment:s;background:var(--panel);border-radius:18px;padding:18px 16px;display:grid;gap:4px}
-.steps li::before{content:"STEP " counter(s);font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.04em}
-.steps b{font-size:15px;font-weight:800}
-.steps span{color:var(--sub);font-size:13px}
-@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}}
+.steps li{counter-increment:s;position:relative;background:var(--panel);border-radius:20px;padding:22px 18px 20px;display:grid;gap:4px;align-content:start}
+.steps li::before{content:"STEP " counter(s);order:1;font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.04em;margin-top:6px}
+.steps .ic{order:0;width:44px;height:44px;border-radius:14px;background:#fff;color:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,92,240,.10)}
+.steps b{order:2;font-size:16px;font-weight:800}
+.steps span:not(.ic){order:3;color:var(--sub);font-size:13px}
+.steps li:not(:last-child)::after{content:"›";position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:#fff;color:var(--blue);font-weight:800;font-size:14px;line-height:17px;text-align:center;box-shadow:0 0 0 1px var(--line);z-index:1}
+@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}.steps li::after{display:none}}
 @media (max-width:420px){.steps{grid-template-columns:1fr}}
 
-.promises{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-.pm{position:relative;background:var(--panel-2);border-radius:18px;padding:26px 18px 18px;display:grid;gap:6px;align-content:start}
-.pm b{font-size:15px;font-weight:800;line-height:1.45}
-.pm span:not(.lbl){font-size:13px;color:var(--sub)}
-@media (max-width:820px){.promises{grid-template-columns:1fr}}
+.promises{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.pm{padding:16px 18px;display:grid;gap:3px;align-content:start;min-width:0}
+.pm + .pm{border-left:1px solid var(--line)}
+.pm .pl{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--blue)}
+.pm b{font-size:16px;font-weight:800;line-height:1.4}
+.pm small{font-size:12px;color:var(--muted);line-height:1.5}
+@media (max-width:820px){.promises{grid-template-columns:1fr}.pm + .pm{border-left:0;border-top:1px solid var(--line)}}
 
 /* form */
-.formcard{border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,40px);display:grid;gap:34px;margin-top:32px;box-shadow:0 10px 30px rgba(25,31,40,.04)}
+.applyhead{background:linear-gradient(100deg,#edf2fe 0%,#f1f0ff 55%,#f6f4ff 100%);border-radius:28px;padding:40px clamp(20px,4vw,48px) 64px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.applyhead .k{color:var(--blue);font-size:14px;font-weight:700}
+.applyhead h2{font-size:clamp(22px,3vw,30px);line-height:1.4;font-weight:800;margin-top:6px}
+.need{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.need li{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700;box-shadow:0 4px 12px rgba(25,31,40,.06)}
+@media (max-width:640px){.applyhead{grid-template-columns:1fr}.ah-art{display:none}}
+.formcard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,40px);display:grid;gap:34px;margin:-36px clamp(0px,2vw,16px) 0;position:relative;box-shadow:0 10px 30px rgba(25,31,40,.06)}
 fieldset{border:0;margin:0;padding:0;display:grid;gap:16px;min-width:0}
-legend{font-weight:800;font-size:18px;margin-bottom:16px;padding:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-legend .n{color:var(--blue)}
+legend{font-weight:800;font-size:18px;margin-bottom:16px;padding:0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+legend .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-size:13px}
 legend small{font-weight:400;font-size:13px;color:var(--muted)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .full{grid-column:1/-1}
@@ -313,25 +323,40 @@ footer b{color:var(--sub)}
       <h2 id="how-h">지원부터 출시까지 이렇게 진행해요</h2>
     </div>
     <ol class="steps">
-      <li><b>지원서 접수</b><span>양식 작성 10분</span></li>
-      <li><b>검토 후 연락</b><span>전화·메일</span></li>
-      <li><b>전용 일정 확정</b><span>대표 일정 + 아정당 기준</span></li>
-      <li><b>최종 견적 공유</b><span>지상비·세부 견적</span></li>
-      <li><b>최종 결정 미팅</b><span>조건 확정 → 출시</span></li>
+      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h4"/></svg></span><b>지원서 접수</b><span>양식 작성 10분</span></li>
+      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 3v-3.2A2 2 0 0 1 4 15z"/><path d="M8 9h8M8 12.5h5"/></svg></span><b>검토 후 연락</b><span>전화·메일</span></li>
+      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg></span><b>전용 일정 확정</b><span>대표 일정 + 아정당 기준</span></li>
+      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><b>최종 견적 공유</b><span>지상비·세부 견적</span></li>
+      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></svg></span><b>최종 결정 미팅</b><span>조건 확정 → 출시</span></li>
     </ol>
     <div class="promises" aria-label="아정당의 약속">
-      <div class="pm"><span class="lbl">전용 일정 보호</span><b>2027.6.30까지<br>파트너사와만 운영</b><span>이후엔 양쪽 모두 자유롭게 활용</span></div>
-      <div class="pm"><span class="lbl">정산 기준</span><b>정산 주기·환율 기준<br>최종 견적 때 서면 안내</b><span>확인 후 최종 결정 미팅</span></div>
-      <div class="pm"><span class="lbl">테스트 회차</span><b>최소 출발 인원·취소 규정<br>미팅에서 함께 결정</b><span>정한 내용은 계약서에 그대로</span></div>
+      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>전용 일정 보호</span><b>2027.6.30까지 파트너 전용</b><small>함께 확정한 일정은 파트너사와만 운영 · 이후엔 양쪽 모두 자유 활용</small></div>
+      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg>정산 기준</span><b>서면으로 먼저 안내</b><small>정산 주기·환율 기준을 최종 견적 때 알려드리고, 확인 후 결정 미팅</small></div>
+      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6"/></svg>테스트 회차</span><b>미팅에서 함께 결정</b><small>최소 출발 인원·취소 규정 → 계약서에 그대로 반영</small></div>
     </div>
   </section>
 
   <!-- 지원서 -->
   <section class="wrap" id="apply" aria-labelledby="apply-h">
-    <div class="center">
-      <p class="k">파트너 지원</p>
-      <h2 id="apply-h">대표 일정 <span class="b">하나만</span> 보여주세요</h2>
-      <p class="d">주력 일정의 <b style="color:var(--ink)">지상비 · 세부 내역 · 차별점</b>, 이 세 가지면 돼요</p>
+    <div class="applyhead">
+      <div class="ah-txt">
+        <p class="k">파트너 지원 · 약 10분</p>
+        <h2 id="apply-h">대표 일정 <span class="b">하나만</span> 보여주세요</h2>
+        <ul class="need" aria-label="준비할 것">
+          <li><span aria-hidden="true">💰</span>지상비</li>
+          <li><span aria-hidden="true">📋</span>세부 내역</li>
+          <li><span aria-hidden="true">✨</span>차별점</li>
+        </ul>
+      </div>
+      <div class="ah-art" aria-hidden="true">
+        <svg viewBox="0 0 160 120" width="160" height="120" fill="none">
+          <path d="M18 92c22-6 40-20 58-36" stroke="#b9cbf7" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
+          <circle cx="16" cy="94" r="5" fill="#ffc928"/>
+          <path d="M148 18L70 52l28 10 10 28z" fill="#fff" stroke="#1b5cf0" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M148 18L98 62" stroke="#1b5cf0" stroke-width="3" stroke-linecap="round"/>
+          <path d="M98 62l2 18 8 10" fill="#e8efff" stroke="#1b5cf0" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
     </div>
 
     <form id="form" class="formcard" novalidate>
