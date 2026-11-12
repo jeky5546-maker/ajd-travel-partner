@@ -1,44 +1,51 @@
 # 아정당 여행 · 현지 파트너 모집 페이지
 
 외부 현지 파트너(랜드사·소규모 여행사·가이드)에게 보내는 모집 소개 + 지원서 페이지예요.
-지원서는 Power Automate를 거쳐 엑셀 표에 한 줄씩 쌓여요.
+지원서는 구글 Apps Script를 거쳐 **구글 시트에 한 줄씩** 쌓이고, 첨부 견적서는 **구글 드라이브 폴더**에 저장돼요.
 
 ```
-index.html                     페이지 (HTML·CSS·JS 한 파일)
-power-automate/schema.json     흐름 트리거에 붙여 넣을 JSON 스키마
-power-automate/excel-columns.txt  엑셀 표 머리글
+index.html                        페이지 (HTML·CSS·JS 한 파일). 맨 아래 스크립트의 ENDPOINT에 접수 주소를 넣어요
+apps-script/Code.gs               구글 시트에 붙일 접수 코드
+power-automate/                   (대안) Power Automate + 엑셀로 받을 때 쓰는 스키마·열 목록
 ```
 
 ## 1. GitHub Pages로 올리기
-1. GitHub에서 새 저장소를 만들고 이 폴더의 파일을 올려요.
-2. 저장소 **Settings → Pages → Build and deployment**
+1. 저장소 **Settings → Pages → Build and deployment**
    - Source: `Deploy from a branch`
    - Branch: `main` / `/ (root)` → Save
-3. 1~2분 뒤 `https://<계정>.github.io/<저장소>/` 가 외부에 보낼 링크예요.
+2. 1~2분 뒤 `https://<계정>.github.io/<저장소>/` 가 외부에 보낼 링크예요.
 
-## 2. Power Automate로 엑셀에 쌓기
-1. **엑셀 준비**: OneDrive/SharePoint에 엑셀 파일을 만들고, 첫 줄에 `power-automate/excel-columns.txt`의 머리글을 넣은 뒤 [삽입] → [표]. 표 이름은 `파트너지원`.
-2. **흐름 만들기**
-   - 트리거: `HTTP 요청을 받은 경우 (When a HTTP request is received)`
-     - 트리거할 수 있는 사용자: `모든 사용자 (Anyone)`
-     - 요청 본문 JSON 스키마: `power-automate/schema.json` 내용 붙여 넣기
-   - 동작(첨부 파일): `조건` → `fileName`이 비어 있지 않으면
-     `OneDrive for Business → 파일 만들기` (SharePoint면 `SharePoint → 파일 만들기`)
-     - 폴더: 예) `/파트너지원_첨부`
-     - 파일 이름: `formatDateTime(utcNow(),'yyMMdd-HHmm')`_`company`_`fileName` 처럼 겹치지 않게
-     - 파일 콘텐츠: 식 `base64ToBinary(triggerBody()?['fileContent'])`
-   - 동작: `Excel Online (Business) → 표에 행 추가` → 위 파일·표 선택 → `excel-columns.txt`의 연결대로 값 넣기 (첨부 파일 열에는 '파일 만들기'의 경로, 검토 상태는 `신규` 직접 입력)
-   - (선택) 동작: `Outlook → 메일 보내기` — 새 지원 알림
-   - 동작: `응답 (Response)` — 상태 코드 `200`, 헤더 `Access-Control-Allow-Origin: *`
-3. 저장하면 트리거에 **HTTP POST URL**이 생겨요.
-4. `index.html` 아래쪽 스크립트의 `const FLOW_URL = "";` 따옴표 안에 그 URL을 넣고 커밋해요.
+## 2. 구글 시트 연결 (Apps Script)
+1. 구글 드라이브에서 **새 구글 시트**를 만들어요. 이름 예: `아정당여행_파트너지원`
+2. 시트 메뉴 **[확장 프로그램] → [Apps Script]**
+3. 기본 `Code.gs` 내용을 지우고 `apps-script/Code.gs` 내용을 붙여 넣어요.
+   - 새 지원서 메일 알림을 받으려면 `NOTIFY_EMAIL`에 메일 주소를 넣어요.
+4. 저장(💾) 후, 위쪽 함수 선택에서 **`setup`** 을 고르고 **[실행]** → 권한 승인
+   - "Google에서 확인하지 않은 앱" 화면이 나오면 [고급] → [(프로젝트 이름)(으)로 이동] → [허용]
+   - 실행이 끝나면 시트에 `파트너지원` 탭(머리글 35칸)과 드라이브에 `파트너지원_첨부` 폴더가 생겨요.
+5. **[배포] → [새 배포]** → 톱니바퀴에서 **웹 앱** 선택
+   - 설명: 파트너 접수
+   - 다음 사용자 인증 정보로 실행: **나**
+   - 액세스 권한이 있는 사용자: **모든 사용자**
+   - [배포] → 나오는 **웹 앱 URL**(`https://script.google.com/macros/s/…/exec`)을 복사해요.
+6. `index.html` 맨 아래 스크립트의 `const ENDPOINT = "";` 따옴표 안에 그 URL을 넣고 커밋·푸시해요.
 
-## 확인
-- 페이지에서 시험 지원서를 1건 제출 → 엑셀에 행이 생기고, 첨부한 파일이 폴더에 저장되면 끝이에요.
-- 첨부 파일은 10MB까지 받아요. 파일 내용(fileContent)은 엑셀에 넣지 말고 파일 만들기에만 쓰세요.
-- `FLOW_URL`이 비어 있으면 미리보기 모드라서, 제출하면 내용이 화면에 텍스트로만 나와요.
+## 3. 확인
+- 웹 앱 URL을 브라우저로 열면 "접수 서버가 동작 중이에요"가 나와요.
+- GitHub Pages 주소에서 시험 지원서를 1건 제출 → 시트에 한 줄이 생기고, 첨부한 파일이 `파트너지원_첨부` 폴더에 저장되면 끝이에요.
+- 엑셀이 필요하면 시트에서 [파일] → [다운로드] → Microsoft Excel(.xlsx).
+- `ENDPOINT`가 비어 있으면 미리보기 모드라서, 제출하면 내용이 화면에 텍스트로만 나와요.
+
+## 고칠 때
+- `Code.gs`를 고쳤다면 **[배포] → [배포 관리] → 연필 → 버전: 새 버전 → [배포]** 해야 반영돼요. URL은 그대로예요.
+- `index.html`만 고쳤다면 커밋·푸시만 하면 돼요.
 
 ## 주의
-- `HTTP 요청을 받은 경우` 트리거는 **Power Automate 프리미엄 라이선스**가 필요해요.
-- 공개 저장소에 올리면 `FLOW_URL`이 누구에게나 보여요. 그 주소로 아무나 데이터를 보낼 수는 있으니, 저장소는 가능하면 **Private**(GitHub Pages는 유료 플랜에서 Private 저장소도 지원)로 두거나 이상한 행이 들어오면 지워 주세요. 페이지에는 스팸 봇 차단용 숨은 칸이 있어요.
+- 회사 구글 워크스페이스 정책상 웹 앱을 "모든 사용자"로 배포하는 게 막혀 있으면 관리자 확인이 필요해요. 그 경우 개인 구글 계정으로 시트를 만들어도 돼요.
+- 저장소가 공개면 `ENDPOINT` 주소가 누구에게나 보여요. 그 주소로 아무나 데이터를 보낼 수는 있으니 이상한 행이 들어오면 지워 주세요. 페이지와 서버 모두 스팸 봇 차단용 숨은 칸을 확인해요.
+- 시트와 첨부 폴더는 만든 사람 계정에만 있어요. 팀원과 보려면 시트·폴더를 공유해 주세요.
+- 첨부 파일은 10MB까지 받아요.
 - 수치(매출·유튜브·상담 조직·이사/청소 실적)는 출처 기준일이 있어요. 갱신되면 `index.html`의 해당 문구만 바꾸면 돼요.
+
+## (대안) Power Automate + 엑셀
+회사 MS 365 프리미엄 라이선스가 있으면 Power Automate "HTTP 요청을 받은 경우" 트리거 → Excel "표에 행 추가"로 받을 수도 있어요. 흐름 URL을 `ENDPOINT`에 넣으면 페이지가 JSON으로 보내요. 스키마는 `power-automate/schema.json`, 엑셀 머리글과 열 연결은 `power-automate/excel-columns.txt`에 있어요.

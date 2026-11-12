@@ -476,10 +476,12 @@ footer b{color:var(--sub)}
 
 <script>
 /* ============================================================
-   설정: Power Automate 흐름의 "HTTP 요청을 받은 경우" URL을 넣으세요.
+   설정: 구글 Apps Script 웹 앱 URL(…/exec)을 넣으세요. (README 참고)
+   Power Automate 흐름 URL을 넣어도 동작해요.
    비워 두면 미리보기 모드로 동작해요(제출 내용을 화면에 텍스트로만 보여줌).
    ============================================================ */
-const FLOW_URL = "";
+const ENDPOINT = "";
+const IS_APPS_SCRIPT = /script\.google(usercontent)?\.com/.test(ENDPOINT);
 
 const $ = s => document.querySelector(s);
 const form = $("#form");
@@ -590,7 +592,7 @@ function finish(saved, d){
   $("#done").hidden = false;
   if (!saved){
     $("#doneTitle").textContent = "미리보기라 접수되지 않았어요";
-    $("#doneMsg").textContent = "접수 주소(FLOW_URL)가 아직 연결되지 않았어요. 작성한 내용은 아래에 정리해 뒀어요.";
+    $("#doneMsg").textContent = "접수 주소(ENDPOINT)가 아직 연결되지 않았어요. 작성한 내용은 아래에 정리해 뒀어요.";
     $("#doneText").textContent = asText(d);
     $("#doneText").hidden = false;
     $("#copy").hidden = false;
@@ -606,14 +608,22 @@ form.addEventListener("submit", e => {
   const d = collect();
   const miss = validate(d);
   if (miss.length){ err.textContent = "이 항목을 확인해 주세요: " + miss.join(", "); err.hidden = false; return; }
-  if (!FLOW_URL){ finish(false, d); return; }
+  if (!ENDPOINT){ finish(false, d); return; }
 
   const btn = $("#send");
   btn.disabled = true; btn.textContent = "제출하는 중…";
   const f = $("#quoteFile").files[0];
   (f ? readFile(f) : Promise.resolve(""))
-    .then(b64 => { d.fileContent = b64; return fetch(FLOW_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) }); })
-    .then(r => { if (!r.ok) throw new Error(r.status); finish(true, d); })
+    .then(b64 => {
+      d.fileContent = b64;
+      // Apps Script는 text/plain으로 보내야 브라우저 사전 확인(CORS) 없이 바로 받아요
+      const opts = IS_APPS_SCRIPT
+        ? { method: "POST", body: JSON.stringify(d) }
+        : { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) };
+      return fetch(ENDPOINT, opts);
+    })
+    .then(r => { if (!r.ok) throw new Error(r.status); return IS_APPS_SCRIPT ? r.json() : { ok: true }; })
+    .then(j => { if (!j || !j.ok) throw new Error((j && j.error) || "fail"); finish(true, d); })
     .catch(() => {
       btn.disabled = false; btn.textContent = "지원서 제출하기";
       err.textContent = "제출하지 못했어요. 잠시 후 다시 눌러 주세요."; err.hidden = false;
