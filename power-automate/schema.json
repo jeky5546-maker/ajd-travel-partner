@@ -1,0 +1,116 @@
+{
+  "type": "object",
+  "properties": {
+    "submittedAt": {
+      "type": "string"
+    },
+    "company": {
+      "type": "string"
+    },
+    "person": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "site": {
+      "type": "string"
+    },
+    "kind": {
+      "type": "string"
+    },
+    "regions": {
+      "type": "string"
+    },
+    "channels": {
+      "type": "string"
+    },
+    "teams": {
+      "type": "string"
+    },
+    "maxpax": {
+      "type": "string"
+    },
+    "assets": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "costBasis": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    },
+    "landTotal": {
+      "type": "string"
+    },
+    "costHotel": {
+      "type": "string"
+    },
+    "costVehicle": {
+      "type": "string"
+    },
+    "costGuide": {
+      "type": "string"
+    },
+    "costMeal": {
+      "type": "string"
+    },
+    "costAdmission": {
+      "type": "string"
+    },
+    "costEtc": {
+      "type": "string"
+    },
+    "marginType": {
+      "type": "string"
+    },
+    "marginValue": {
+      "type": "string"
+    },
+    "quoteLink": {
+      "type": "string"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "fileType": {
+      "type": "string"
+    },
+    "fileContent": {
+      "type": "string"
+    },
+    "ourLink": {
+      "type": "string"
+    },
+    "baseLink": {
+      "type": "string"
+    },
+    "diff": {
+      "type": "string"
+    },
+    "idea": {
+      "type": "string"
+    },
+    "noShopping": {
+      "type": "string"
+    },
+    "openCost": {
+      "type": "string"
+    },
+    "smallGroup": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "company",
+    "email",
+    "ourLink",
+    "landTotal"
+  ]
+}
