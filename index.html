@@ -108,39 +108,55 @@ tr:last-child td{font-weight:800;color:var(--blue)}
 .fit li::before{content:"";width:20px;height:20px;border-radius:50%;margin-top:2px;background:var(--blue) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
 .fit .no li::before{background:#c4cad3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M6.5 6.5l7 7M13.5 6.5l-7 7' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") center/16px no-repeat}
 .fit .no li{color:var(--sub)}
-.fit li b{display:block;font-weight:800;color:var(--ink)}
-.fit li span{font-size:14px;color:var(--sub)}
 @media (max-width:720px){.fit{grid-template-columns:1fr}}
 
 .steps{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:s}
-.steps li{counter-increment:s;position:relative;background:var(--panel);border-radius:20px;padding:22px 18px 20px;display:grid;gap:4px;align-content:start}
-.steps li::before{content:"STEP " counter(s);order:1;font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.04em;margin-top:6px}
-.steps .ic{order:0;width:44px;height:44px;border-radius:14px;background:#fff;color:var(--blue);display:grid;place-items:center;box-shadow:0 4px 12px rgba(27,92,240,.10)}
-.steps b{order:2;font-size:16px;font-weight:800}
-.steps span:not(.ic){order:3;color:var(--sub);font-size:13px}
-.steps li:not(:last-child)::after{content:"›";position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:18px;height:18px;border-radius:50%;background:#fff;color:var(--blue);font-weight:800;font-size:14px;line-height:17px;text-align:center;box-shadow:0 0 0 1px var(--line);z-index:1}
-@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}.steps li::after{display:none}}
+.steps li{counter-increment:s;background:var(--panel);border-radius:18px;padding:18px 16px;display:grid;gap:4px}
+.steps li::before{content:"STEP " counter(s);font-size:11px;font-weight:800;color:var(--blue);letter-spacing:.04em}
+.steps b{font-size:15px;font-weight:800}
+.steps span{color:var(--sub);font-size:13px}
+@media (max-width:820px){.steps{grid-template-columns:1fr 1fr}}
 @media (max-width:420px){.steps{grid-template-columns:1fr}}
 
-.promises{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border:1px solid var(--line);border-radius:18px;background:#fff}
-.pm{padding:16px 18px;display:grid;gap:3px;align-content:start;min-width:0}
-.pm + .pm{border-left:1px solid var(--line)}
-.pm .pl{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--blue)}
-.pm b{font-size:16px;font-weight:800;line-height:1.4}
-.pm small{font-size:12px;color:var(--muted);line-height:1.5}
-@media (max-width:820px){.promises{grid-template-columns:1fr}.pm + .pm{border-left:0;border-top:1px solid var(--line)}}
+.promises{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.pm{position:relative;background:var(--panel-2);border-radius:18px;padding:26px 18px 18px;display:grid;gap:6px;align-content:start}
+.pm b{font-size:15px;font-weight:800;line-height:1.45}
+.pm span:not(.lbl){font-size:13px;color:var(--sub)}
+@media (max-width:820px){.promises{grid-template-columns:1fr}}
+
+.hnav{display:flex;align-items:center;gap:16px}
+.hnav a:not(.btn){color:var(--sub);text-decoration:none;font-size:14px;font-weight:500}
+.eyebrow{display:inline-block;background:#fff;color:var(--blue-ink);font-weight:700;font-size:13px;border-radius:999px;padding:6px 12px;margin-bottom:14px;box-shadow:0 2px 8px rgba(27,92,240,.08)}
+.badges{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.badges li{background:#fff;border:1px solid #d9e3fb;border-radius:8px;padding:6px 11px;font-size:13px;font-weight:700;color:var(--ink)}
+.badges li::before{content:"✓ ";color:var(--blue)}
+.stats.s3{grid-template-columns:repeat(3,1fr)}
+.band.dark .stats .hl{background:rgba(46,107,255,.22);border-color:rgba(143,180,255,.45)}
+.band.dark .stats .hl b{color:var(--sky2)}
+@media (max-width:760px){.stats.s3{grid-template-columns:1fr}}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.center.left{text-align:left;justify-items:start}
+.chan{display:grid;gap:12px}
+.chan div{position:relative;background:var(--panel);border-radius:16px;padding:22px 18px 16px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline}
+.chan b{font-size:17px;font-weight:800}
+.chan span:not(.lbl){font-size:14px;color:var(--blue-ink);font-weight:700}
+@media (max-width:760px){.split2{grid-template-columns:1fr}}
+.fitline{margin-top:16px;background:var(--panel-2);border-radius:14px;padding:14px 18px;font-size:14px;color:var(--sub)}
+.fitline b{color:var(--ink);margin-right:8px}
+.steps.s4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:820px){.steps.s4{grid-template-columns:1fr 1fr}}
+@media (max-width:420px){.steps.s4{grid-template-columns:1fr}}
+.ctaband{margin-top:56px;background:linear-gradient(110deg,#1b5cf0,#4a7dff);color:#fff;border-radius:24px;padding:28px clamp(18px,4vw,40px);display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.ctaband div{display:grid;gap:4px}
+.ctaband b{font-size:clamp(20px,2.6vw,24px);font-weight:800}
+.ctaband span{opacity:.9;font-size:15px}
+.btn-white{background:#fff;color:var(--blue-ink)}
 
 /* form */
-.applyhead{background:linear-gradient(100deg,#edf2fe 0%,#f1f0ff 55%,#f6f4ff 100%);border-radius:28px;padding:40px clamp(20px,4vw,48px) 64px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
-.applyhead .k{color:var(--blue);font-size:14px;font-weight:700}
-.applyhead h2{font-size:clamp(22px,3vw,30px);line-height:1.4;font-weight:800;margin-top:6px}
-.need{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.need li{display:inline-flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700;box-shadow:0 4px 12px rgba(25,31,40,.06)}
-@media (max-width:640px){.applyhead{grid-template-columns:1fr}.ah-art{display:none}}
-.formcard{background:#fff;border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,40px);display:grid;gap:34px;margin:-36px clamp(0px,2vw,16px) 0;position:relative;box-shadow:0 10px 30px rgba(25,31,40,.06)}
+.formcard{border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,40px);display:grid;gap:34px;margin-top:32px;box-shadow:0 10px 30px rgba(25,31,40,.04)}
 fieldset{border:0;margin:0;padding:0;display:grid;gap:16px;min-width:0}
-legend{font-weight:800;font-size:18px;margin-bottom:16px;padding:0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-legend .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--blue-soft);color:var(--blue);font-size:13px}
+legend{font-weight:800;font-size:18px;margin-bottom:16px;padding:0;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+legend .n{color:var(--blue)}
 legend small{font-weight:400;font-size:13px;color:var(--muted)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .full{grid-column:1/-1}
@@ -179,6 +195,15 @@ input:focus,textarea:focus{outline:none;border-color:var(--blue);background:#fff
 @media (max-width:520px){.marginrow{grid-template-columns:1fr}}
 .filebox{display:grid;gap:4px;background:#fff;border:1px dashed #c9d6f5;border-radius:10px;padding:10px 12px;min-width:0}
 .filebox input{font:inherit;font-size:13px;max-width:100%}
+.consent{background:var(--panel);border-radius:12px;padding:14px 16px;display:grid;gap:8px}
+.consent .ck{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;cursor:pointer;font-size:14px}
+.consent .ck input{width:20px;height:20px;margin-top:1px;accent-color:var(--blue)}
+.consent ul{margin:0;padding-left:50px;display:grid;gap:2px;font-size:12px;color:var(--sub)}
+.moretoggle{display:grid;gap:4px;justify-items:start;border-top:1px dashed var(--line);padding-top:20px}
+.moretoggle button{background:var(--blue-soft);color:var(--blue-ink);border:0;border-radius:10px;padding:12px 16px;font:inherit;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.moretoggle .plus{transition:transform .2s;display:inline-block}
+.moretoggle button[aria-expanded="true"] .plus{transform:rotate(45deg)}
+.more-body{display:grid;gap:34px}
 .agree{display:grid;gap:12px}
 .agree label{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:15px;align-items:start;cursor:pointer}
 .agree input{width:20px;height:20px;margin-top:2px;accent-color:var(--blue)}
@@ -196,14 +221,87 @@ footer{margin-top:80px;background:var(--panel);color:var(--muted);font-size:13px
 footer .wrap{padding-block:28px 36px}
 footer b{color:var(--sub)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* ===== v12: 이사 파트너 페이지 톤 (네이비 히어로·파란 띠·다크 섹션·원형 단계) ===== */
+:root{--navy:#0a1834;--navy2:#0f2350;--sky2:#8fb4ff;--glass:rgba(255,255,255,.06);--glassline:rgba(255,255,255,.12)}
+.hero{background:radial-gradient(900px 420px at 80% 10%,rgba(46,107,255,.45),transparent 60%),linear-gradient(180deg,#0d2156 0%,var(--navy) 100%);color:#fff}
+.hero .wrap{padding-block:64px 72px}
+.hero h1{color:#fff}
+.hero .b{color:var(--sky2)}
+.hero .lead{color:#c6d2ea}
+.eyebrow{background:transparent;color:#9fb1d4;box-shadow:none;padding:0;font-size:14px}
+.badges li{background:rgba(255,255,255,.08);border:1px solid var(--glassline);color:#dfe7f6;font-weight:600;border-radius:999px;padding:7px 13px}
+.badges li::before{content:"";}
+.hero .btn-blue{box-shadow:0 10px 24px rgba(27,92,240,.45)}
+.hero .btn-line{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+.graph::before{border-color:rgba(143,180,255,.35)}
+.chipc{background:rgba(255,255,255,.1);color:#fff;border:1px solid var(--glassline);box-shadow:none;backdrop-filter:blur(6px)}
+.chipc em{color:var(--sky2)}
+.strip2{background:var(--blue);color:#fff}
+.strip2 .wrap{display:flex;align-items:center;justify-content:center;gap:10px;padding-block:12px;font-weight:700;font-size:14px;text-align:center}
+.strip2 .new{background:rgba(255,255,255,.22);border-radius:999px;padding:2px 9px;font-size:11px;letter-spacing:.04em}
+.band{padding-bottom:88px}
+.band.dark{background:var(--navy);color:#fff}
+.band.dark .center .k{color:#9fb1d4}
+.band.dark h2{color:#fff}
+.band.dark .b{color:var(--sky2)}
+.band.dark .center .d,.band.dark .d{color:#c6d2ea}
+.band.dark .whybox{background:transparent;padding-inline:0}
+.band.dark .stats div{background:var(--glass);border:1px solid var(--glassline)}
+.band.dark .stats .sl{color:#9fb1d4}
+.band.dark .stats b{color:#fff}
+.band.dark .stats .sn{color:#8ea0c2}
+.band.dark .src{color:#7f91b4}
+.band.dark .more button{color:#c6d2ea}
+.band.dark .about{color:var(--ink)}
+.band.dark .chan div{background:var(--glass);border:1px solid var(--glassline)}
+.band.dark .chan b{color:#fff}
+.band.dark .chan span:not(.lbl){color:var(--sky2)}
+.steps.s4{counter-reset:none;gap:8px;position:relative}
+.steps.s4 li{background:transparent;text-align:center;justify-items:center;padding:6px 8px;position:relative}
+.steps.s4 li::before{content:none}
+.steps.s4 li:not(:last-child)::after{content:"›";position:absolute;right:-8px;top:24px;color:#b8c2d3;font-size:22px}
+.steps .ic{font-style:normal;width:68px;height:68px;border-radius:50%;background:var(--blue-soft);display:grid;place-items:center;font-size:28px;margin-bottom:8px}
+.steps li:first-child .ic{background:var(--blue);box-shadow:0 8px 20px rgba(27,92,240,.35)}
+@media (max-width:820px){.steps.s4 li:nth-child(2)::after{content:none}}
+@media (max-width:420px){.steps.s4 li::after{content:none!important}}
+.band.final{padding-top:8px}
+.applygrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
+.applyhead{position:sticky;top:24px;display:grid;gap:12px;padding-top:12px}
+.applyhead .k{color:#9fb1d4;font-size:15px;margin:0}
+.applyhead h2{font-size:clamp(30px,4vw,42px);line-height:1.3;font-weight:800;color:#fff}
+.applyhead .d{color:#c6d2ea;max-width:28em}
+.badges.dk{margin-top:6px}
+.applybody{min-width:0}
+.applybody .formcard,.applybody .done{color:var(--ink);background:#fff}
+.applybody .formcard{margin-top:0;border:0;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.applybody .done{margin-top:0}
+@media (max-width:860px){.applygrid{grid-template-columns:1fr}.applyhead{position:static}}
+footer{margin-top:0}
+
+/* ===== v13: 히어로 모델·흰 로고 ===== */
+.hdr{background:#0d2156;border-bottom:1px solid rgba(255,255,255,.08)}
+.hdr .hnav a:not(.btn){color:#c6d2ea}
+.logo.lw{gap:8px;color:#fff}
+.logo.lw img{height:26px;width:auto;display:block}
+.logo.lw .t{color:#fff;font-size:17px;font-weight:700;opacity:.9}
+.herologo{display:block;height:58px;width:auto;margin-bottom:22px}
+.hero .wrap{align-items:end;padding-bottom:0}
+.hero .wrap>div:first-child{padding-bottom:64px}
+.model{position:relative;justify-self:center;width:min(360px,100%);align-self:end}
+.model img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 78%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0,#000 16%,#000 78%,transparent 100%),linear-gradient(to right,transparent 0,#000 14%,#000 86%,transparent 100%);mask-composite:intersect}
+.model .chipc{position:absolute}
+.model .m1{left:-18%;top:30%}
+.model .m2{right:-14%;top:58%}
+@media (max-width:820px){.model{width:min(240px,64%)}.model .m1{left:-6%}.model .m2{right:-4%}}
 </style>
 </head>
 <body>
 
 <header class="hdr">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="아정당 여행"><span class="badge">AJD</span>아정당 <span class="t">여행</span></a>
-    <a class="btn btn-blue btn-sm" href="#apply">파트너 지원</a>
+    <a class="logo lw" href="#top" aria-label="아정당 여행"><img src="assets/logo_white.png" alt="아정당" width="60" height="29"><span class="t">여행</span></a>
+    <nav class="hnav" aria-label="바로가기"><a href="#about" id="openAbout">회사 소개</a><a class="btn btn-blue btn-sm" href="#apply">우선 신청</a></nav>
   </div>
 </header>
 
@@ -211,39 +309,45 @@ footer b{color:var(--sub)}
   <div class="hero">
     <div class="wrap">
       <div>
-        <h1>모객은 아정당이,<br>현지는 <span class="b">파트너</span>가 맡을게요</h1>
-        <p class="lead"><b style="color:var(--ink)">모객·판매·상담</b>은 아정당, <b style="color:var(--ink)">현지 운영</b>은 파트너<br>아정당 전용 여행을 함께 만들어요</p>
+        <img class="herologo" src="assets/logo_white.png" alt="아정당" width="147" height="71">
+        <p class="eyebrow">아정당 여행 런칭 파트너 모집</p>
+        <h1>아정당 여행,<br>처음부터 함께 만들<br><span class="b">현지 파트너</span>를 찾아요</h1>
+        <p class="lead">모객·판매·CS는 아정당이 맡고, 현지 운영은 파트너가 맡아요.<br>아정당에서만 파는 첫 전용 상품을 같이 설계해요.</p>
+        <ul class="badges" aria-label="핵심 조건">
+          <li>출시 준비 중</li><li>모객·판매·CS는 아정당</li><li>단독·조인·대형 행사</li>
+        </ul>
         <div class="cta">
-          <a class="btn btn-blue" href="#apply">파트너 지원하기 ›</a>
-          <a class="btn btn-line" href="#about" id="openAbout">아정당 사업소개 보기</a>
+          <a class="btn btn-blue" href="#apply">런칭 파트너 우선 신청 ›</a>
+          <a class="btn btn-line" href="#why">아정당은 어떤 회사?</a>
         </div>
       </div>
-      <div class="graph" aria-label="아정당 주요 수치">
-        <div class="core"><div>아정당<small>×</small>파트너사</div></div>
-        <span class="chipc c1">유튜브 구독자 <em>36.5만</em></span>
-        <span class="chipc c2">상담 조직 <em>310명</em></span>
-        <span class="chipc c3">2025 매출 <em>2,195억</em></span>
-        <span class="chipc c4">쇼핑·옵션 <em>0원</em></span>
+      <div class="model" aria-label="아정당 전속모델">
+        <img src="assets/model.png" alt="아정당 전속모델" width="300" height="460">
+        <span class="chipc m1">모객·판매·CS <em>아정당</em></span>
+        <span class="chipc m2">현지 운영 <em>파트너</em></span>
       </div>
     </div>
   </div>
 
-  <!-- 왜 아정당 -->
+  <div class="strip2"><div class="wrap"><span class="new">NEW</span><span>아정당 여행 런칭 파트너 모집 · 지역별로 먼저 신청하신 파트너와 먼저 이야기해요</span></div></div>
+
+  <div class="band dark">
+  <!-- 회사 역량 -->
   <section class="wrap" id="why" aria-labelledby="why-h">
     <div class="whybox">
       <div class="center">
-        <p class="k">왜 아정당이랑 해야 할까요?</p>
-        <h2 id="why-h">고객을 모으고 끝까지 챙기는 건<br><span class="b">아정당이 제일 잘해요</span></h2>
-        <p class="d">생활서비스 비교·상담 플랫폼의 <b style="color:var(--ink)">모객력 + 상담 조직</b>, 이제 여행으로</p>
+        <p class="k">아정당은 어떤 회사인가요?</p>
+        <h2 id="why-h">여행은 처음이지만,<br><span class="b">고객을 모으는 일</span>은 해 왔어요</h2>
+        <p class="d">인터넷·렌탈·이사 같은 생활서비스를 비교하고 상담해 온 회사예요. 아래는 아정당 회사 전체 기준 숫자예요.</p>
       </div>
       <div class="stats">
-        <div><span class="sl">연 매출 (2025)</span><b>2,195억</b><span class="sn">외부 투자 없이 흑자 성장</span></div>
+        <div class="hl"><span class="sl">자체 플랫폼 월 방문자</span><b>250만</b><span class="sn">2025.12 기준</span></div>
+        <div><span class="sl">아정당 연 매출 (2025)</span><b>2,195억</b><span class="sn">외부 투자 없이 흑자 성장</span></div>
         <div><span class="sl">유튜브 '아정당'</span><b>36.5만</b><span class="sn">구독자 · 누적 조회수 2.6억 회</span></div>
-        <div><span class="sl">상담 조직</span><b>310명</b><span class="sn">상담부터 사후 응대까지</span></div>
-        <div><span class="sl">이사·청소 신사업</span><b>41.4만</b><span class="sn">진출 2년간 누적 고객 유입</span></div>
+        <div><span class="sl">생활서비스 분야</span><b>9개</b><span class="sn">인터넷·렌탈·이사·상조 등</span></div>
       </div>
-      <p class="src">출처: 한국경제 2026.7.29(매출·CS 인력), 소셜러스 채널 통계 2026.11.9(유튜브), 아정당 회사소개서(이사·청소 실적)</p>
-      <div class="more"><button type="button" id="toggleAbout" aria-expanded="false" aria-controls="about">사업소개 자세히 보기 <span class="ar">›</span></button></div>
+      <p class="src">출처: 아정당 회사소개서(월 방문자 2025.12·사업 분야), 한국경제 2026.7.29(매출), 소셜러스 채널 통계 2026.11.9(유튜브)</p>
+      <div class="more"><button type="button" id="toggleAbout" aria-expanded="false" aria-controls="about">회사 소개 자세히 보기 <span class="ar">›</span></button></div>
       <div class="about" id="about" hidden>
         <div class="ab">
           <h3>아정당은</h3>
@@ -269,115 +373,100 @@ footer b{color:var(--sub)}
           <h3>아정당 여행이 만드는 여행</h3>
           <p><b style="color:var(--ink)">잘 챙기니까, 더 자유롭다.</b> 고급화도 최저가 경쟁도 아닌, 합리적인 가격에서 만족도가 가장 높은 여행을 만들어요.</p>
           <ul>
-            <li><b>우리끼리간당</b> 가족·부부·친구 단독 출발, 전용 차량, 고르는 일정</li>
-            <li><b>함께모여간당</b> 정해진 날짜에 같은 취향끼리 조인</li>
-            <li>처음엔 항공 제외 세미패키지로 시작해요</li>
+            <li><b>단독여행</b> 가족·부부·친구 단독 출발, 전용 차량, 고르는 일정</li>
+            <li><b>조인여행</b> 정해진 날짜에 같은 취향끼리 조인</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 파트너 혜택 -->
-  <section class="wrap" aria-labelledby="give-h">
-    <div class="center">
-      <p class="k">파트너사가 얻는 것</p>
-      <h2 id="give-h">중개가 아니라, <span class="b">같이 만드는 콜라보 상품</span>이에요</h2>
-      <p class="d">아정당 직접 계약·판매 · 파트너는 현지 운영 · 상품에 파트너 이름 함께 표기</p>
-    </div>
-    <div class="cards">
-      <div class="card"><span class="lbl">모객</span><h3>고객은 아정당이 모아요</h3><p>유튜브·광고·회원 채널로 모객<br>판매·결제·상담까지 아정당<br>플랫폼 수수료 없는 새 판매 채널</p></div>
-      <div class="card"><span class="lbl">브랜딩</span><h3>이름을 걸고 함께 팔아요</h3><p>"○○여행 × 아정당" 공동 브랜딩<br>상품 페이지에 설계 파트너 소개</p></div>
-      <div class="card"><span class="lbl">물량</span><h3>성과가 다음 물량이 돼요</h3><p>빠르고 명확한 정산<br>성과 좋으면 다음 회차·신규 지역 우선 제안</p></div>
+  <!-- 모객 -->
+  <section class="wrap" aria-labelledby="mk-h">
+    <div class="split2">
+      <div class="center left">
+        <p class="k">모객과 마케팅</p>
+        <h2 id="mk-h">손님 모으는 일은<br><span class="b">아정당이 맡아요</span></h2>
+        <p class="d">월 250만 명이 찾는 아정당 플랫폼과 유튜브 '아정당' 채널로 여행을 알려요. 파트너사는 광고비 걱정 없이 현지 운영에만 집중하면 돼요.</p>
+      </div>
+      <div class="chan" aria-label="모객 채널">
+        <div><span class="lbl">채널</span><b>유튜브 '아정당'</b><span>구독자 36.5만</span></div>
+        <div><span class="lbl">플랫폼</span><b>아정당 자체 플랫폼</b><span>월 방문자 250만</span></div>
+        <div><span class="lbl">생활 이벤트</span><b>이사·결혼·가족 행사</b><span>생활의 순간마다 찾는 고객</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- 찾는 파트너 -->
-  <section class="wrap" aria-labelledby="fit-h">
+  </div>
+
+  <div class="band light">
+  <!-- 다른 점 -->
+  <section class="wrap" aria-labelledby="ops-h">
     <div class="center">
-      <p class="k">이런 파트너를 찾아요</p>
-      <h2 id="fit-h">규모보다 <span class="b">설계력</span>, 관행보다 <span class="b">유연함</span></h2>
+      <p class="k">아정당과 함께하면</p>
+      <h2 id="ops-h">새로운 손님을,<br><span class="b">함께 정한 조건으로</span> 운영해요</h2>
+      <p class="d">판매·결제·상담은 기본으로 아정당이 맡고, 그 위에 이런 차이가 있어요.</p>
     </div>
-    <div class="fit">
-      <div class="box"><span class="lbl">함께하고 싶어요</span>
-        <ul>
-          <li><span><b>꼼꼼한 운영</b>소규모 단독이든 단체 조인이든, 한국인 여행객 한 팀 한 팀</span></li>
-          <li><span><b>위치 좋은 숙소·식당</b>호텔은 등급보다 위치, 단체식당 대신 현지 식당</span></li>
-          <li><span><b>유연한 일정</b>바꾸자는 제안에 "같이 해보죠"</span></li>
-        </ul>
-      </div>
-      <div class="box no"><span class="lbl gray">아정당 상품에선 안 해요</span>
-        <ul>
-          <li><span><b>쇼핑·옵션 ✕</b>현장 추가 결제도 없어요</span></li>
-          <li><span><b>외곽 호텔 ✕</b>단가 맞추기용 구성</span></li>
-          <li><span><b>통 견적 ✕</b>내역을 알 수 없는 견적</span></li>
-        </ul>
-      </div>
+    <div class="cards">
+      <div class="card"><span class="lbl">새로운 고객층</span><h3>여행사 손님이 아니라<br>생활서비스 고객이에요</h3><p>인터넷·렌탈·이사를 아정당에서 쓰는 고객에게 여행을 제안해요. 지금 판매하시는 채널과 겹치지 않는 손님이에요.</p></div>
+      <div class="card"><span class="lbl">마진은 함께</span><h3>운영하실 몫을<br>처음부터 같이 정해요</h3><p>견적은 실비와 희망 마진을 나눠서 받아요. 마진을 먼저 맞춰 두고 시작하니, 출발마다 셈이 분명해요.</p></div>
+      <div class="card"><span class="lbl">혜택으로 판매</span><h3>최저가 경쟁보다<br>혜택으로 팔아요</h3><p>아정당 생활서비스 혜택과 묶어서 파는 구조를 준비하고 있어요. 가격 비교에만 휘둘리지 않아요.</p></div>
     </div>
+  </section>
+
+  <!-- 콜라보 -->
+  <section class="wrap" aria-labelledby="co-h">
+    <div class="center">
+      <p class="k">파트너사가 얻는 것</p>
+      <h2 id="co-h">중개가 아니라,<br><span class="b">같이 만드는 전용 상품</span>이에요</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="lbl">공동 기획</span><h3>일정을 처음부터 같이 짜요</h3><p>파트너사가 잘 아는 호텔·식당·동선을 아정당 상품 기준에 맞춰 일정에 반영해요.</p></div>
+      <div class="card"><span class="lbl">상품 폭</span><h3>단독부터 대형 행사까지</h3><p>소규모 단독, 컨셉이 확실한 조인형, 단체·대형 행사까지 잘하는 분야부터 함께해요.</p></div>
+      <div class="card"><span class="lbl">다음 제안</span><h3>첫 상품이 자리 잡으면</h3><p>다음 출발 회차와 다른 지역 상품도 먼저 제안해요.</p></div>
+    </div>
+    <p class="fitline"><b>이런 파트너를 찾아요</b> 소규모 단독, 컨셉·타깃이 확실한 조인형 상품을 운영해 본 곳 · 위치 좋은 호텔과 현지 맛집으로 일정을 짜는 곳 · 아정당 상품 기준(쇼핑·옵션 없는 일정)에 맞춰 운영할 수 있는 곳 · 대형 단체 행사도 가능하면 더 좋아요</p>
   </section>
 
   <!-- 진행 순서 -->
-  <section class="wrap" aria-labelledby="how-h">
+  <section class="wrap" id="how" aria-labelledby="how-h">
     <div class="center">
       <p class="k">진행 순서</p>
-      <h2 id="how-h">지원부터 출시까지 이렇게 진행해요</h2>
+      <h2 id="how-h">신청은 1분,<br><span class="b">첫 출발은 함께 꼼꼼하게</span></h2>
     </div>
-    <ol class="steps">
-      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h4"/></svg></span><b>지원서 접수</b><span>양식 작성 10분</span></li>
-      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 3v-3.2A2 2 0 0 1 4 15z"/><path d="M8 9h8M8 12.5h5"/></svg></span><b>검토 후 연락</b><span>전화·메일</span></li>
-      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7"/></svg></span><b>전용 일정 확정</b><span>대표 일정 + 아정당 기준</span></li>
-      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span><b>최종 견적 공유</b><span>지상비·세부 견적</span></li>
-      <li><span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></svg></span><b>최종 결정 미팅</b><span>조건 확정 → 출시</span></li>
+    <ol class="steps s4">
+      <li><i class="ic" aria-hidden="true">📝</i><b>1분 신청</b><span>연락처만 남겨 주세요</span></li>
+      <li><i class="ic" aria-hidden="true">📞</i><b>담당자 연락</b><span>전화·메일로 먼저 연락드려요</span></li>
+      <li><i class="ic" aria-hidden="true">🗺️</i><b>전용 일정·최종 견적</b><span>확정 일정 기준 지상비와 세부 견적</span></li>
+      <li><i class="ic" aria-hidden="true">🤝</i><b>최종 결정 미팅</b><span>최소 출발 인원·취소 규정·정산 조건 확정 후 계약</span></li>
     </ol>
-    <div class="promises" aria-label="아정당의 약속">
-      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/></svg>전용 일정 보호</span><b>2027.6.30까지 파트너 전용</b><small>함께 확정한 일정은 파트너사와만 운영 · 이후엔 양쪽 모두 자유 활용</small></div>
-      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg>정산 기준</span><b>서면으로 먼저 안내</b><small>정산 주기·환율 기준을 최종 견적 때 알려드리고, 확인 후 결정 미팅</small></div>
-      <div class="pm"><span class="pl"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.6"/></svg>테스트 회차</span><b>미팅에서 함께 결정</b><small>최소 출발 인원·취소 규정 → 계약서에 그대로 반영</small></div>
-    </div>
   </section>
 
-  <!-- 지원서 -->
+  </div>
+
+  <div class="band dark final">
+  <!-- 신청서 -->
   <section class="wrap" id="apply" aria-labelledby="apply-h">
+    <div class="applygrid">
     <div class="applyhead">
-      <div class="ah-txt">
-        <p class="k">파트너 지원 · 약 10분</p>
-        <h2 id="apply-h">대표 일정 <span class="b">하나만</span> 보여주세요</h2>
-        <ul class="need" aria-label="준비할 것">
-          <li><span aria-hidden="true">💰</span>지상비</li>
-          <li><span aria-hidden="true">📋</span>세부 내역</li>
-          <li><span aria-hidden="true">✨</span>차별점</li>
-        </ul>
-      </div>
-      <div class="ah-art" aria-hidden="true">
-        <svg viewBox="0 0 160 120" width="160" height="120" fill="none">
-          <path d="M18 92c22-6 40-20 58-36" stroke="#b9cbf7" stroke-width="2" stroke-dasharray="4 6" stroke-linecap="round"/>
-          <circle cx="16" cy="94" r="5" fill="#ffc928"/>
-          <path d="M148 18L70 52l28 10 10 28z" fill="#fff" stroke="#1b5cf0" stroke-width="3" stroke-linejoin="round"/>
-          <path d="M148 18L98 62" stroke="#1b5cf0" stroke-width="3" stroke-linecap="round"/>
-          <path d="M98 62l2 18 8 10" fill="#e8efff" stroke="#1b5cf0" stroke-width="3" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <p class="k">런칭 파트너 우선 신청</p>
+      <h2 id="apply-h">지금, 아정당과<br>함께하세요.</h2>
+      <p class="d">연락처만 남겨 주시면 담당자가 먼저 연락드려요. 견적·일정 정보는 원하시면 지금 함께 보내셔도 돼요.</p>
+      <ul class="badges dk"><li>신청은 1분</li><li>지역별 먼저 신청한 곳부터</li><li>출시 준비 중</li></ul>
     </div>
+    <div class="applybody">
 
     <form id="form" class="formcard" novalidate>
       <div class="hp" aria-hidden="true"><label for="homepage2">비워 두세요</label><input id="homepage2" type="text" tabindex="-1" autocomplete="off"></div>
 
       <fieldset>
-        <legend><span class="n">01</span> 업체 정보</legend>
+        <legend>기본 정보</legend>
         <div class="grid2">
-          <div class="f"><label for="company">업체명<span class="req">*</span></label><input id="company" type="text" required placeholder="예: 타이베이 로컬투어"></div>
-          <div class="f"><label for="person">담당자 성함 · 직책<span class="req">*</span></label><input id="person" type="text" required placeholder="예: 김OO 실장"></div>
-          <div class="f"><label for="phone">연락처 (전화 · 카카오톡 ID)<span class="req">*</span></label><input id="phone" type="text" required placeholder="예: +886-9xx-xxx-xxx / 카톡 ID"></div>
-          <div class="f"><label for="email">이메일<span class="req">*</span></label><input id="email" type="email" required placeholder="name@company.com"></div>
-          <div class="f full"><label for="site">홈페이지 · 판매 페이지 · 인스타</label><input id="site" type="url" placeholder="https://"></div>
-        </div>
-        <div class="f"><span class="lab">업체 형태</span>
-          <div class="pills" role="group" aria-label="업체 형태">
-            <label><input type="radio" name="kind" value="현지 랜드사" id="k1"><span>현지 랜드사</span></label>
-            <label><input type="radio" name="kind" value="소규모 여행사" id="k2"><span>소규모 여행사</span></label>
-            <label><input type="radio" name="kind" value="현지 가이드·투어사" id="k3"><span>현지 가이드·투어사</span></label>
-            <label><input type="radio" name="kind" value="체험·액티비티 업체" id="k4"><span>체험·액티비티 업체</span></label>
-          </div>
+          <div class="f"><label for="company">업체명<span class="req">*</span></label><input id="company" type="text" required autocomplete="organization" placeholder="예: 타이베이 로컬투어"></div>
+          <div class="f"><label for="person">담당자 성함<span class="req">*</span></label><input id="person" type="text" required autocomplete="name" placeholder="예: 김OO 실장"></div>
+          <div class="f"><label for="phone">연락처 (전화 · 카카오톡 ID)<span class="req">*</span></label><input id="phone" type="text" required autocomplete="tel" placeholder="예: +886-9xx-xxx-xxx / 카톡 ID"></div>
+          <div class="f"><label for="email">이메일 <span class="hint">선택</span></label><input id="email" type="email" autocomplete="email" placeholder="name@company.com"></div>
+          <div class="f full"><label for="site">홈페이지 · 대표 상품 링크 <span class="hint">선택</span></label><input id="site" type="url" placeholder="https:// (홈페이지, 판매 페이지, 인스타 등)"></div>
         </div>
         <div class="f"><span class="lab">운영 지역<span class="req">*</span> <span class="hint">여러 개 고를 수 있어요</span></span>
           <div class="pills" role="group" aria-label="운영 지역">
@@ -391,6 +480,33 @@ footer b{color:var(--sub)}
             <label><input type="checkbox" name="region" value="기타" id="r8"><span>기타</span></label>
           </div>
         </div>
+        <div class="consent">
+          <label class="ck"><input type="checkbox" id="consent"><span><b>[필수] 개인정보 수집·이용에 동의해요</b></span></label>
+          <ul>
+            <li>수집 항목: 업체명, 담당자 성함, 연락처, 이메일</li>
+            <li>이용 목적: 파트너 제휴 검토와 연락</li>
+            <li>보유 기간: 제휴 검토가 끝난 뒤 1년 (요청하시면 바로 파기해요)</li>
+            <li>동의하지 않으실 수 있지만, 그 경우 신청 접수가 어려워요.</li>
+          </ul>
+        </div>
+      </fieldset>
+
+      <div class="moretoggle">
+        <button type="button" id="toggleMore" aria-expanded="false" aria-controls="more"><span class="plus" aria-hidden="true">＋</span> 견적·일정 정보도 지금 보내기 <span class="hint">선택</span></button>
+        <p class="hint">미리 보내 주시면 검토가 빨라져요. 나중에 담당자가 따로 요청드려도 괜찮아요.</p>
+      </div>
+
+      <div id="more" class="more-body" hidden>
+      <fieldset>
+        <legend><span class="n">A</span> 운영 규모와 판매 채널</legend>
+        <div class="f"><span class="lab">업체 형태</span>
+          <div class="pills" role="group" aria-label="업체 형태">
+            <label><input type="radio" name="kind" value="현지 랜드사" id="k1"><span>현지 랜드사</span></label>
+            <label><input type="radio" name="kind" value="소규모 여행사" id="k2"><span>소규모 여행사</span></label>
+            <label><input type="radio" name="kind" value="현지 가이드·투어사" id="k3"><span>현지 가이드·투어사</span></label>
+            <label><input type="radio" name="kind" value="체험·액티비티 업체" id="k4"><span>체험·액티비티 업체</span></label>
+          </div>
+        </div>
         <div class="f"><span class="lab">지금 판매 중인 채널</span>
           <div class="pills" role="group" aria-label="판매 채널">
             <label><input type="checkbox" name="channel" value="마이리얼트립" id="c1"><span>마이리얼트립</span></label>
@@ -401,12 +517,8 @@ footer b{color:var(--sub)}
             <label><input type="checkbox" name="channel" value="여행사 B2B" id="c6"><span>여행사 B2B</span></label>
           </div>
         </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span class="n">02</span> 운영 규모</legend>
         <div class="grid2">
-          <div class="f"><label for="teams">하루 동시 운영 가능 팀 수<span class="req">*</span></label><div class="unit"><input id="teams" type="number" min="0" inputmode="numeric" required placeholder="예: 4"><span>팀 / 일</span></div></div>
+          <div class="f"><label for="teams">하루 동시 운영 가능 팀 수</label><div class="unit"><input id="teams" type="number" min="0" inputmode="numeric" placeholder="예: 4"><span>팀 / 일</span></div></div>
           <div class="f"><label for="maxpax">한 팀 최대 인원 (조인 포함)</label><div class="unit"><input id="maxpax" type="number" min="0" inputmode="numeric" placeholder="예: 30"><span>명</span></div></div>
           <div class="f"><label for="assets">보유 차량 · 가이드</label><input id="assets" type="text" placeholder="예: 9인승 3대, 한국어 가이드 5명"></div>
           <div class="f"><label for="price">대표 일정 1인 판매가 (지금 파는 가격)</label><input id="price" type="text" placeholder="예: 3박4일 4인 기준 1인 55~60만 원"></div>
@@ -414,10 +526,10 @@ footer b{color:var(--sub)}
       </fieldset>
 
       <fieldset>
-        <legend><span class="n">03</span> 주력 지상비와 세부 내역 <small>항공 제외 · 1인 기준</small></legend>
+        <legend><span class="n">B</span> 주력 지상비와 세부 내역 <small>항공 제외 · 1인 기준</small></legend>
         <p class="note">입력한 일정·지상비·마진은 아정당 여행사업팀만 검토용으로 보고, 외부에 공개하지 않아요. 지금은 대표 일정 기준으로 주시면 되고, 최종 견적은 일정이 확정된 뒤 다시 받아요.</p>
         <div class="costbox">
-          <div class="f full"><label for="costBasis">견적 기준 조건<span class="req">*</span></label><input id="costBasis" type="text" required placeholder="예: 타이베이 3박4일, 성인 4명, 4성 2인1실, 전용차량, 석식 3회, 쇼핑·옵션 없음"></div>
+          <div class="f full"><label for="costBasis">견적 기준 조건</label><input id="costBasis" type="text" placeholder="예: 타이베이 3박4일, 성인 4명, 4성 2인1실, 전용차량, 석식 3회, 쇼핑·옵션 없음"></div>
           <div class="f"><span class="lab">통화</span>
             <div class="pills" role="group" aria-label="통화">
               <label><input type="radio" name="currency" value="KRW" id="cur1" checked><span>원 (KRW)</span></label>
@@ -428,7 +540,7 @@ footer b{color:var(--sub)}
               <label><input type="radio" name="currency" value="EUR" id="cur6"><span>EUR</span></label>
             </div>
           </div>
-          <div class="f"><label for="landTotal">1인 지상비 합계 <span class="hint">마진(수수료) 제외</span><span class="req">*</span></label><input id="landTotal" type="number" min="0" inputmode="decimal" required placeholder="예: 400000"></div>
+          <div class="f"><label for="landTotal">1인 지상비 합계 <span class="hint">마진(수수료) 제외</span></label><input id="landTotal" type="number" min="0" inputmode="decimal" placeholder="예: 400000"></div>
           <div class="f full"><span class="lab">세부 내역 <span class="hint">아는 만큼 적어 주세요 · 1인 기준</span></span>
             <div class="breakdown">
               <label><span>숙박</span><input id="costHotel" type="number" min="0" inputmode="decimal" placeholder="0"></label>
@@ -460,41 +572,46 @@ footer b{color:var(--sub)}
       </fieldset>
 
       <fieldset>
-        <legend><span class="n">04</span> 대표 일정과 차별화 포인트</legend>
+        <legend><span class="n">C</span> 대표 일정과 차별화 포인트</legend>
         <div class="compare">
-          <div class="f"><label for="ourLink">우리 대표 일정 링크<span class="req">*</span></label><input id="ourLink" type="url" required placeholder="https:// (판매 페이지, PDF, 노션 등)"></div>
+          <div class="f"><label for="ourLink">우리 대표 일정 링크</label><input id="ourLink" type="url" placeholder="https:// (판매 페이지, PDF, 노션 등)"></div>
           <div class="f"><label for="baseLink">비교 기준 상품 링크</label><input id="baseLink" type="url" placeholder="https:// 비슷한 일반 패키지나 경쟁 상품"></div>
           <p class="vs">기준 상품과 비교해서 무엇이 다른지 적어 주세요. 호텔 위치, 식당, 동선, 체험, 가이드 운영 방식 무엇이든 좋아요.</p>
-          <div class="f full"><label for="diff">기준 상품 대비 차별화 포인트<span class="req">*</span></label><textarea id="diff" required placeholder="예: 같은 가격대에서 호텔을 시먼딩 도보 3분으로 잡고, 단체식당 대신 현지인이 줄 서는 훠궈집으로 가요."></textarea></div>
+          <div class="f full"><label for="diff">기준 상품 대비 차별화 포인트</label><textarea id="diff" placeholder="예: 같은 가격대에서 호텔을 시먼딩 도보 3분으로 잡고, 단체식당 대신 현지인이 줄 서는 훠궈집으로 가요."></textarea></div>
         </div>
         <div class="f"><label for="idea">아정당 전용으로 만들고 싶은 일정이 있다면 (선택)</label><textarea id="idea" placeholder="예: 부모님 동반 가족용 타이베이 3박4일, 온천 1박 포함"></textarea></div>
       </fieldset>
 
       <fieldset>
-        <legend><span class="n">05</span> 운영 기준 확인</legend>
+        <legend><span class="n">D</span> 운영 기준 확인</legend>
         <div class="agree">
           <label><input type="checkbox" id="a1"><span>쇼핑 일정과 현지 옵션 판매 없이 운영할 수 있어요.</span></label>
           <label><input type="checkbox" id="a2"><span>견적을 실비(호텔·차량·가이드·입장료)와 수수료로 나눠서 드릴 수 있어요.</span></label>
           <label><input type="checkbox" id="a3"><span>2~4명 소규모 단독 출발도 운영할 수 있어요.</span></label>
         </div>
-        <p class="hint">해당하지 않는 항목이 있어도 지원할 수 있어요. 미팅에서 같이 이야기해요.</p>
+        <p class="hint">해당하지 않는 항목이 있어도 신청할 수 있어요. 미팅에서 같이 이야기해요.</p>
       </fieldset>
 
+      </div>
+
       <div class="submit">
-        <p>제출한 내용은 아정당 여행사업팀만 확인해요. 검토 후 담당자가 연락드릴게요.</p>
-        <button type="submit" class="btn btn-blue" id="send">지원서 제출하기</button>
+        <p>제출한 내용은 아정당 여행사업팀만 확인해요. 아정당 여행은 출시를 준비하고 있고, 계약은 판매 준비가 끝난 뒤 진행해요.</p>
+        <button type="submit" class="btn btn-blue" id="send">우선 신청하기</button>
       </div>
       <p class="err" id="err" hidden></p>
     </form>
 
     <div class="done" id="done" hidden>
       <div class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 20 20"><path d="M5 10.5l3.2 3.2L15 7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3 id="doneTitle">지원서가 접수됐어요</h3>
-      <p id="doneMsg">검토 후 담당자가 연락드릴게요. 함께할 수 있으면 좋겠어요.</p>
+      <h3 id="doneTitle">우선 신청이 접수됐어요</h3>
+      <p id="doneMsg">담당자가 확인하고 먼저 연락드릴게요. 함께할 수 있으면 좋겠어요.</p>
       <pre id="doneText" hidden></pre>
-      <button type="button" class="btn btn-line" id="copy" hidden>지원 내용 복사</button>
+      <button type="button" class="btn btn-line" id="copy" hidden>신청 내용 복사</button>
+    </div>
+    </div>
     </div>
   </section>
+  </div>
 </main>
 
 <footer>
@@ -570,48 +687,59 @@ function collect(){
     marginType: radio("marginType"), marginValue: val("marginValue"),
     quoteLink: val("quoteLink"), fileName: f ? f.name : "", fileType: f ? (f.type || "application/octet-stream") : "", fileContent: "",
     ourLink: val("ourLink"), baseLink: val("baseLink"), diff: val("diff"), idea: val("idea"),
-    noShopping: $("#a1").checked ? "O" : "X", openCost: $("#a2").checked ? "O" : "X", smallGroup: $("#a3").checked ? "O" : "X"
+    noShopping: $("#a1").checked ? "O" : "X", openCost: $("#a2").checked ? "O" : "X", smallGroup: $("#a3").checked ? "O" : "X",
+    consent: $("#consent").checked ? "동의" : "",
+    detail: $("#more").hidden ? "기본만" : "상세 포함"
   };
 }
 function validate(d){
   const miss = [];
+  const url = v => !v || /^https?:\/\//.test(v);
   if (!d.company) miss.push("업체명");
-  if (!d.person) miss.push("담당자");
+  if (!d.person) miss.push("담당자 성함");
   if (!d.phone) miss.push("연락처");
-  if (!/.+@.+\..+/.test(d.email)) miss.push("이메일");
+  if (d.email && !/.+@.+\..+/.test(d.email)) miss.push("이메일 형식");
   if (!d.regions) miss.push("운영 지역");
-  if (!d.teams) miss.push("하루 운영 팀 수");
-  if (!d.costBasis) miss.push("견적 기준 조건");
-  if (!d.landTotal) miss.push("1인 지상비 합계");
+  if (!url(d.site)) miss.push("홈페이지·대표 상품 링크(https://로 시작)");
+  if (!d.consent) miss.push("개인정보 수집·이용 동의");
   const f = $("#quoteFile").files[0];
   if (f && f.size > MAX_FILE) miss.push("첨부 파일 크기(10MB 이하)");
-  if (d.quoteLink && !/^https?:\/\//.test(d.quoteLink)) miss.push("견적서 링크(https://로 시작)");
-  if (!/^https?:\/\//.test(d.ourLink)) miss.push("대표 일정 링크(https://로 시작)");
-  if (!d.diff) miss.push("차별화 포인트");
+  if (!url(d.quoteLink)) miss.push("견적서 링크(https://로 시작)");
+  if (!url(d.ourLink)) miss.push("대표 일정 링크(https://로 시작)");
+  if (!url(d.baseLink)) miss.push("비교 기준 상품 링크(https://로 시작)");
   return miss;
 }
+
+// 선택 항목(견적·일정 정보) 펼치기
+$("#toggleMore").addEventListener("click", () => {
+  const m = $("#more"), b = $("#toggleMore");
+  m.hidden = !m.hidden;
+  b.setAttribute("aria-expanded", String(!m.hidden));
+});
 function asText(d){
+  const more = d.detail === "상세 포함";
   return [
-    "[아정당 여행 파트너 지원서]",
-    `업체명: ${d.company} (${d.kind || "형태 미선택"})`,
-    `담당자: ${d.person} / ${d.phone} / ${d.email}`,
-    d.site && `홈페이지: ${d.site}`,
+    "[아정당 여행 런칭 파트너 우선 신청]",
+    `업체명: ${d.company}`,
+    `담당자: ${d.person} / ${d.phone}` + (d.email ? ` / ${d.email}` : ""),
+    d.site && `홈페이지·대표 상품: ${d.site}`,
     `운영 지역: ${d.regions}`,
-    d.channels && `판매 채널: ${d.channels}`,
-    `하루 동시 운영: ${d.teams}팀` + (d.maxpax ? ` / 팀당 최대 ${d.maxpax}명` : ""),
-    d.assets && `차량·가이드: ${d.assets}`,
-    d.price && `대표 일정 판매가: ${d.price}`,
-    `견적 기준: ${d.costBasis}`,
-    `1인 지상비 합계: ${d.landTotal} ${d.currency}`,
-    `세부(1인): 숙박 ${d.costHotel || "-"} / 차량 ${d.costVehicle || "-"} / 가이드·기사 ${d.costGuide || "-"} / 식사 ${d.costMeal || "-"} / 입장·체험 ${d.costAdmission || "-"} / 기타 ${d.costEtc || "-"}`,
-    d.marginValue && `희망 마진: ${d.marginValue}${d.marginType === "%" ? "%" : " " + d.currency + " (1인)"}`,
-    d.fileName && `첨부 견적서: ${d.fileName}`,
-    d.quoteLink && `견적서 링크: ${d.quoteLink}`,
-    `대표 일정: ${d.ourLink}`,
-    d.baseLink && `비교 기준 상품: ${d.baseLink}`,
-    `차별화 포인트: ${d.diff}`,
-    d.idea && `전용 일정 아이디어: ${d.idea}`,
-    `운영 기준: 노쇼핑·노옵션 ${d.noShopping} / 실비+수수료 견적 ${d.openCost} / 2~4명 단독 ${d.smallGroup}`
+    more && d.kind && `업체 형태: ${d.kind}`,
+    more && d.channels && `판매 채널: ${d.channels}`,
+    more && d.teams && `하루 동시 운영: ${d.teams}팀` + (d.maxpax ? ` / 팀당 최대 ${d.maxpax}명` : ""),
+    more && d.assets && `차량·가이드: ${d.assets}`,
+    more && d.price && `대표 일정 판매가: ${d.price}`,
+    more && d.costBasis && `견적 기준: ${d.costBasis}`,
+    more && d.landTotal && `1인 지상비 합계: ${d.landTotal} ${d.currency}`,
+    more && d.landTotal && `세부(1인): 숙박 ${d.costHotel || "-"} / 차량 ${d.costVehicle || "-"} / 가이드·기사 ${d.costGuide || "-"} / 식사 ${d.costMeal || "-"} / 입장·체험 ${d.costAdmission || "-"} / 기타 ${d.costEtc || "-"}`,
+    more && d.marginValue && `희망 마진: ${d.marginValue}${d.marginType === "%" ? "%" : " " + d.currency + " (1인)"}`,
+    more && d.fileName && `첨부 견적서: ${d.fileName}`,
+    more && d.quoteLink && `견적서 링크: ${d.quoteLink}`,
+    more && d.ourLink && `대표 일정: ${d.ourLink}`,
+    more && d.baseLink && `비교 기준 상품: ${d.baseLink}`,
+    more && d.diff && `차별화 포인트: ${d.diff}`,
+    more && d.idea && `전용 일정 아이디어: ${d.idea}`,
+    more && `운영 기준: 노쇼핑·노옵션 ${d.noShopping} / 실비+수수료 견적 ${d.openCost} / 2~4명 단독 ${d.smallGroup}`
   ].filter(Boolean).join("\n");
 }
 function finish(saved, d){
@@ -639,7 +767,7 @@ form.addEventListener("submit", e => {
 
   const btn = $("#send");
   btn.disabled = true; btn.textContent = "제출하는 중…";
-  const f = $("#quoteFile").files[0];
+  const f = $("#more").hidden ? null : $("#quoteFile").files[0];
   (f ? readFile(f) : Promise.resolve(""))
     .then(b64 => {
       d.fileContent = b64;
@@ -652,7 +780,7 @@ form.addEventListener("submit", e => {
     .then(r => { if (!r.ok) throw new Error(r.status); return IS_APPS_SCRIPT ? r.json() : { ok: true }; })
     .then(j => { if (!j || !j.ok) throw new Error((j && j.error) || "fail"); finish(true, d); })
     .catch(() => {
-      btn.disabled = false; btn.textContent = "지원서 제출하기";
+      btn.disabled = false; btn.textContent = "우선 신청하기";
       err.textContent = "제출하지 못했어요. 잠시 후 다시 눌러 주세요."; err.hidden = false;
     });
 });

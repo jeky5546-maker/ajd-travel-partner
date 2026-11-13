@@ -1,5 +1,5 @@
 /**
- * 아정당 여행 파트너 지원서 → 구글 시트 자동 적재 (+ 첨부 파일은 구글 드라이브 폴더에 저장)
+ * 아정당 여행 런칭 파트너 우선 신청 → 구글 시트 자동 적재 (+ 첨부 파일은 구글 드라이브 폴더에 저장)
  *
  * GitHub Pages의 index.html이 이 웹 앱으로 지원서를 보내요.
  * 설치 방법은 저장소 README.md의 "구글 시트 연결" 참고.
@@ -12,6 +12,7 @@ const MAX_FILE_BYTES = 10 * 1024 * 1024;
 
 const COLUMNS = [
   ['submittedAt', '접수일시'],
+  ['detail', '접수 구분'],
   ['company', '업체명'],
   ['person', '담당자'],
   ['phone', '연락처'],
@@ -44,20 +45,21 @@ const COLUMNS = [
   ['noShopping', '노쇼핑·노옵션'],
   ['openCost', '원가 공개 견적'],
   ['smallGroup', '2~4명 단독'],
+  ['consent', '개인정보 동의'],
   ['status', '검토 상태'],
   ['memo', '메모']
 ];
 
 // 주소를 브라우저로 열었을 때 동작 확인용
 function doGet() {
-  return ContentService.createTextOutput('아정당 여행 파트너 지원 접수 서버가 동작 중이에요.');
+  return ContentService.createTextOutput('아정당 여행 파트너 신청 접수 서버가 동작 중이에요.');
 }
 
 function doPost(e) {
   try {
     const d = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     if (d.hp) return json_({ ok: true });                       // 스팸 봇
-    if (!d.company || !d.email || !d.ourLink || !d.landTotal) {
+    if (!d.company || !d.person || !d.phone || !d.regions || d.consent !== '동의') {
       return json_({ ok: false, error: '필수 항목이 비어 있어요' });
     }
 
@@ -126,12 +128,12 @@ function safeName_(s) {
 function notify_(d, fileUrl) {
   if (!NOTIFY_EMAIL) return;
   try {
-    MailApp.sendEmail(NOTIFY_EMAIL, '[아정당 여행] 새 파트너 지원: ' + d.company, [
+    MailApp.sendEmail(NOTIFY_EMAIL, '[아정당 여행] 새 런칭 파트너 우선 신청: ' + d.company, [
       '업체명: ' + d.company + ' (' + (d.kind || '-') + ')',
-      '담당자: ' + d.person + ' / ' + d.phone + ' / ' + d.email,
+      '담당자: ' + d.person + (d.email ? ' / ' + d.email : ''),
       '운영 지역: ' + d.regions,
-      '1인 지상비: ' + d.landTotal + ' ' + (d.currency || ''),
-      '대표 일정: ' + d.ourLink,
+      '연락처: ' + d.phone,
+      '접수 구분: ' + (d.detail || '-') + (d.landTotal ? ' / 1인 지상비 ' + d.landTotal + ' ' + (d.currency || '') : ''),
       fileUrl ? '첨부: ' + fileUrl : '',
       '',
       '시트: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl()

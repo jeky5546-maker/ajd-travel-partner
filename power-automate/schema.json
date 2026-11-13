@@ -105,12 +105,19 @@
     },
     "smallGroup": {
       "type": "string"
+    },
+    "consent": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
     }
   },
   "required": [
     "company",
-    "email",
-    "ourLink",
-    "landTotal"
+    "person",
+    "phone",
+    "regions",
+    "consent"
   ]
 }
