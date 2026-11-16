@@ -585,27 +585,9 @@ body{word-break:keep-all;overflow-wrap:break-word}
           <div class="f full"><label for="site">홈페이지 · 대표 상품 링크 <span class="hint">선택</span></label><input id="site" type="url" placeholder="https:// (홈페이지, 판매 페이지, 인스타 등)"></div>
         </div>
         <div class="f"><span class="lab">운영 지역<span class="req">*</span> <span class="hint">여러 개 고를 수 있어요</span></span>
-          <p class="regnote">1차 오픈 지역은 아시아·유럽이에요. 미주·대양주 등 다른 지역은 ‘기타’를 골라 지역명을 적어 주시면, 지역을 넓힐 때 먼저 연락드릴게요.</p>
-          <div class="pills" role="group" aria-label="운영 지역">
-            <label><input type="checkbox" name="region" value="대만" id="r1"><span>대만</span></label>
-            <label><input type="checkbox" name="region" value="일본" id="r2"><span>일본</span></label>
-            <label><input type="checkbox" name="region" value="상하이" id="r3"><span>상하이</span></label>
-            <label><input type="checkbox" name="region" value="충칭" id="r4"><span>충칭</span></label>
-            <label><input type="checkbox" name="region" value="중국 기타" id="r5"><span>중국 기타</span></label>
-            <label><input type="checkbox" name="region" value="베트남" id="r6"><span>베트남</span></label>
-            <label><input type="checkbox" name="region" value="유럽" id="r7"><span>유럽</span></label>
-            <label><input type="checkbox" name="region" value="기타" id="r8"><span>기타</span></label>
-          </div>
-          <div class="subreg" id="euBox" hidden>
-            <p class="subq">주로 운영하시는 권역을 골라 주세요 <span class="hint">여러 개 선택 가능</span></p>
-            <div class="pills" role="group" aria-label="유럽 세부 권역">
-              <label><input type="checkbox" name="eu" value="전지역" id="eu0"><span>유럽 전지역</span></label>
-              <label><input type="checkbox" name="eu" value="서유럽" id="eu1"><span>서유럽</span></label>
-              <label><input type="checkbox" name="eu" value="동유럽/발칸" id="eu2"><span>동유럽/발칸</span></label>
-              <label><input type="checkbox" name="eu" value="북유럽/발트" id="eu3"><span>북유럽/발트</span></label>
-              <label><input type="checkbox" name="eu" value="남유럽/지중해" id="eu4"><span>남유럽/지중해</span></label>
-            </div>
-          </div>
+          <p class="regnote">1차 오픈은 아시아·유럽 중심이에요. 다른 지역도 신청해 두시면 지역을 넓힐 때 먼저 연락드릴게요. 목록에 없는 지역(대양주 등)은 ‘기타’를 골라 적어 주세요.</p>
+          <div class="pills" role="group" aria-label="운영 지역" id="regionPills"></div>
+          <div id="subBoxes"></div>
           <div class="subreg" id="etcBox" hidden>
             <label class="subq" for="regionEtc">운영하시는 지역을 적어 주세요</label>
             <input id="regionEtc" type="text" placeholder="예: 미국 서부, 호주, 괌·사이판">
@@ -805,29 +787,55 @@ function readFile(f){
   });
 }
 
-// 운영 지역: 유럽 세부 권역 · 기타 지역명
-const euAll = $("#eu0"), euSubs = [...form.querySelectorAll('input[name="eu"]:not(#eu0)')];
-function syncRegionBoxes(){
-  $("#euBox").hidden = !$("#r7").checked;
-  $("#etcBox").hidden = !$("#r8").checked;
+// 운영 지역: 대분류 → 세부 지역 (첫 칸은 '전지역') · 기타는 직접 입력
+const REGIONS = [
+  { key: "sea", name: "동남아", subs: ["베트남", "태국", "필리핀", "말레이시아", "싱가포르", "인도네시아/발리", "라오스/캄보디아"] },
+  { key: "sa",  name: "서남아", subs: ["인도", "네팔", "스리랑카", "몰디브"] },
+  { key: "jp",  name: "일본",   subs: ["도쿄/간토", "오사카/간사이", "규슈/후쿠오카", "홋카이도", "오키나와"] },
+  { key: "cn",  name: "중국·대만", subs: ["대만", "상하이", "충칭", "베이징", "중국 기타"] },
+  { key: "eu",  name: "유럽",   subs: ["서유럽", "동유럽/발칸", "북유럽/발트", "남유럽/지중해"] },
+  { key: "am",  name: "미주",   subs: ["미국 서부", "미국 동부", "하와이", "캐나다", "중남미"] },
+  { key: "etc", name: "기타" }
+];
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+$("#regionPills").innerHTML = REGIONS.map(r =>
+  `<label><input type="checkbox" name="region" value="${esc(r.name)}" id="rg-${r.key}"><span>${esc(r.name)}</span></label>`).join("");
+$("#subBoxes").innerHTML = REGIONS.filter(r => r.subs).map(r => `
+  <div class="subreg" id="box-${r.key}" hidden>
+    <p class="subq">${esc(r.name)} · 주로 운영하시는 지역을 골라 주세요 <span class="hint">여러 개 선택 가능</span></p>
+    <div class="pills" role="group" aria-label="${esc(r.name)} 세부 지역">
+      <label><input type="checkbox" name="sub-${r.key}" value="전지역" data-all><span>${esc(r.name)} 전지역</span></label>
+      ${r.subs.map(s => `<label><input type="checkbox" name="sub-${r.key}" value="${esc(s)}"><span>${esc(s)}</span></label>`).join("")}
+    </div>
+  </div>`).join("");
+REGIONS.forEach(r => {
+  const top = $("#rg-" + r.key);
+  if (r.subs) {
+    const box = $("#box-" + r.key), all = box.querySelector("[data-all]"), rest = [...box.querySelectorAll("input:not([data-all])")];
+    top.addEventListener("change", () => {
+      box.hidden = !top.checked;
+      if (!top.checked) box.querySelectorAll("input").forEach(i => { i.checked = false; });
+    });
+    all.addEventListener("change", () => { if (all.checked) rest.forEach(i => { i.checked = false; }); });
+    rest.forEach(i => i.addEventListener("change", () => { if (i.checked) all.checked = false; }));
+  } else {
+    top.addEventListener("change", () => {
+      $("#etcBox").hidden = !top.checked;
+      if (top.checked) $("#regionEtc").focus(); else $("#regionEtc").value = "";
+    });
+  }
+});
+// 세부 지역을 안 고른 대분류 / 지역명을 안 적은 기타
+function regionMissing(){
+  return REGIONS.filter(r => $("#rg-" + r.key).checked &&
+    (r.subs ? !checked("sub-" + r.key).length : !val("regionEtc")))
+    .map(r => r.subs ? `${r.name} 세부 지역` : "기타 지역명");
 }
-$("#r7").addEventListener("change", () => {
-  if (!$("#r7").checked) form.querySelectorAll('input[name="eu"]').forEach(i => { i.checked = false; });
-  syncRegionBoxes();
-});
-$("#r8").addEventListener("change", () => {
-  if (!$("#r8").checked) $("#regionEtc").value = "";
-  syncRegionBoxes();
-  if ($("#r8").checked) $("#regionEtc").focus();
-});
-euAll.addEventListener("change", () => { if (euAll.checked) euSubs.forEach(i => { i.checked = false; }); });
-euSubs.forEach(i => i.addEventListener("change", () => { if (i.checked) euAll.checked = false; }));
-syncRegionBoxes();
 function regionText(){
-  return checked("region").map(r => {
-    if (r === "유럽") { const s = checked("eu"); return s.length ? "유럽 > " + s.join(", ") : ""; }
-    if (r === "기타") { const t = val("regionEtc"); return t ? "기타: " + t : ""; }
-    return r;
+  return REGIONS.filter(r => $("#rg-" + r.key).checked).map(r => {
+    if (!r.subs) { const t = val("regionEtc"); return t ? "기타: " + t : ""; }
+    const s = checked("sub-" + r.key);
+    return s.length ? `${r.name} > ${s.join(", ")}` : "";
   }).filter(Boolean).join(" · ");
 }
 
@@ -858,8 +866,7 @@ function validate(d){
   if (!d.phone) miss.push("연락처");
   if (d.email && !/.+@.+\..+/.test(d.email)) miss.push("이메일 형식");
   if (!checked("region").length) miss.push("운영 지역");
-  if ($("#r7").checked && !checked("eu").length) miss.push("유럽 세부 권역");
-  if ($("#r8").checked && !val("regionEtc")) miss.push("기타 지역명");
+  miss.push(...regionMissing());
   if (!url(d.site)) miss.push("홈페이지·대표 상품 링크(https://로 시작)");
   if (!d.consent) miss.push("개인정보 수집·이용 동의");
   const f = $("#quoteFile").files[0];
