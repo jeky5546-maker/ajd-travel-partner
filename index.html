@@ -305,6 +305,28 @@ footer{margin-top:0}
 @keyframes rtflow{to{stroke-dashoffset:-20}}
 @media (max-width:820px){.route{width:min(380px,100%);padding-bottom:40px}.hero .wrap>div:first-child{padding-bottom:8px}}
 @media (prefers-reduced-motion:reduce){.rt-dash{animation:none}}
+
+/* ===== v14-m: 모바일 히어로 최적화 ===== */
+.hero,.strip2{word-break:keep-all}
+.hero .lead{text-wrap:pretty}
+@media (max-width:820px){
+  .hero .wrap{padding-top:36px;gap:8px}
+  .herologo{height:40px;margin-bottom:16px}
+  .hero .lead{font-size:15px}
+  .hero .lead br{display:none}
+  .hero .cta{display:grid;grid-template-columns:1fr;gap:8px;margin-top:24px}
+  .hero .cta .btn{width:100%;padding-block:14px}
+  .route{width:min(320px,88%);padding:8px 0 28px}
+  .route .chipc{font-size:12px;padding:6px 11px 6px 7px;gap:6px}
+  .route .chipc::before{width:15px;height:15px}
+  .route .r1{left:-4%;top:82%}
+  .route .r2{right:-6%;top:40%}
+  .strip2 .wrap{font-size:13px;line-height:1.5;padding-block:10px}
+}
+@media (max-width:400px){
+  .hero .badges li{font-size:12px;padding:6px 11px}
+  .route{width:min(290px,86%)}
+}
 </style>
 </head>
 <body>
@@ -323,7 +345,7 @@ footer{margin-top:0}
         <img class="herologo" src="assets/logo_white.png" alt="아정당" width="147" height="71">
         <p class="eyebrow">아정당 여행 런칭 파트너 모집</p>
         <h1>아정당 여행,<br>처음부터 함께 만들<br><span class="b">현지 파트너</span>를 찾아요</h1>
-        <p class="lead">모객·판매·CS는 아정당이 맡고, 현지 운영은 파트너가 맡아요.<br>아정당에서만 파는 첫 전용 상품을 같이 설계해요.</p>
+        <p class="lead">모객·판매·CS는 아정당이 맡고, 현지 운영은 파트너가 맡아요. <br>아정당에서만 파는 첫 전용 상품을 같이 설계해요.</p>
         <ul class="badges" aria-label="핵심 조건">
           <li>출시 준비 중</li><li>모객·판매·CS는 아정당</li><li>단독·조인·대형 행사</li>
         </ul>
