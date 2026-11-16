@@ -323,6 +323,17 @@ footer{margin-top:0}
   .route .r2{right:-26%;top:38%}
   .strip2 .wrap{font-size:13px;line-height:1.5;padding-block:10px}
 }
+/* 이런 파트너를 찾아요: 모바일은 키워드 카드 */
+.fitm{display:none}
+@media (max-width:720px){
+  .fitline{display:none}
+  .fitm{display:grid;gap:12px;margin-top:16px;background:var(--panel-2);border-radius:16px;padding:18px 16px;word-break:keep-all}
+  .fitm>b{font-size:15px;font-weight:800;color:var(--ink)}
+  .fitm ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .fitm li{background:#fff;border-radius:12px;padding:12px 12px 11px;display:grid;gap:2px;align-content:start}
+  .fitm li strong{font-size:14px;font-weight:800;color:var(--blue-ink);line-height:1.35}
+  .fitm li span{font-size:12.5px;color:var(--sub);line-height:1.4}
+}
 @media (max-width:400px){
   .hero .badges li{font-size:12px;padding:6px 11px}
   .route{width:min(210px,58%)}
@@ -511,6 +522,15 @@ footer{margin-top:0}
       <div class="card"><span class="lbl">다음 제안</span><h3>첫 상품이 자리 잡으면</h3><p>다음 출발 회차와 다른 지역 상품도 먼저 제안해요.</p></div>
     </div>
     <p class="fitline"><b>이런 파트너를 찾아요</b> 소규모 단독, 컨셉·타깃이 확실한 조인형 상품을 운영해 본 곳 · 위치 좋은 호텔과 현지 맛집으로 일정을 짜는 곳 · 아정당 상품 기준(쇼핑·옵션 없는 일정)에 맞춰 운영할 수 있는 곳 · 대형 단체 행사도 가능하면 더 좋아요</p>
+    <div class="fitm" aria-label="이런 파트너를 찾아요">
+      <b>이런 파트너를 찾아요</b>
+      <ul>
+        <li><strong>단독·조인형</strong><span>운영 경험</span></li>
+        <li><strong>호텔·맛집 일정</strong><span>위치 좋은 호텔, 현지 맛집</span></li>
+        <li><strong>노쇼핑·노옵션</strong><span>아정당 상품 기준 운영</span></li>
+        <li><strong>대형 단체 행사</strong><span>가능하면 우대</span></li>
+      </ul>
+    </div>
   </section>
 
   <!-- 진행 순서 -->
